@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqL-To-2fd">
@@ -134,16 +134,25 @@
                                     <rect key="frame" x="16" y="420" width="288" height="73"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kE2-yT-85X">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kE2-yT-85X">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Start Day">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Start Day">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                 </state>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="16" y="500" width="288" height="43"/>
                                 </variation>
+                                <connections>
+                                    <action selector="startDayButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wR5-AF-PR2"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mild.png" translatesAutoresizingMaskIntoConstraints="NO" id="glo-Xx-1tx">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -204,6 +213,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="248" y="186" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="minusLemonPurchaseButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oyY-a1-VO8"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2u3-Tx-A9d">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -213,6 +225,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="170" y="186" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="addLemonPurchaseButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nQC-4s-w7g"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dwV-HZ-DYp">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -222,6 +237,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="170" y="219" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="addIceCubePurchaseButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="RiM-Tg-JKc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7a3-Fu-OQv">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -231,6 +249,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="248" y="219" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="minusIceCubePurchaseButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="rzE-ip-YPM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5m-BG-Q0y">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -240,6 +261,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="170" y="320" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="addLemonMixButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="VnS-GU-yoy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb2-jw-W1P">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -249,6 +273,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="248" y="320" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="minusLemonMixButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tKU-dE-Ilj"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BwZ-Kg-8cb">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -258,6 +285,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="170" y="355" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="addIceCubeMixButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IX7-5p-aND"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fJ-Io-jO7">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -267,6 +297,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="248" y="358" width="30" height="30"/>
                                 </variation>
+                                <connections>
+                                    <action selector="minusIceCubeMixButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="yeE-uH-9SV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -338,26 +371,24 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="fundsLabel" destination="QLq-zE-Cgt" id="gbI-3Q-FrX"/>
+                        <outlet property="iceCubeInventoryLabel" destination="VLF-U7-VgS" id="Bby-QD-1qJ"/>
+                        <outlet property="iceCubeMixNumberLabel" destination="4G8-yg-XIv" id="zxc-xT-GOa"/>
+                        <outlet property="iceCubePurchaseNumberLabel" destination="GRw-7V-iW7" id="xRR-jD-Hgc"/>
+                        <outlet property="lemonInventoryLabel" destination="8Qh-iJ-e7y" id="KV8-Lc-pIA"/>
+                        <outlet property="lemonMixNumberLabel" destination="ejc-5V-PAX" id="0oh-71-Heh"/>
+                        <outlet property="lemonPurchaseNumberLabel" destination="Zap-vr-Txa" id="Gxq-Ct-ByZ"/>
+                        <outlet property="minusIceCubeMixButton" destination="5fJ-Io-jO7" id="a2J-gU-23V"/>
+                        <outlet property="minusIceCubePurchaseButton" destination="7a3-Fu-OQv" id="Slo-3K-v0V"/>
+                        <outlet property="minusLemonMixButton" destination="nb2-jw-W1P" id="2pf-ub-CUj"/>
+                        <outlet property="minusLemonPurchaseButton" destination="yWz-bo-YXr" id="FVq-An-COS"/>
+                        <outlet property="weatherImage" destination="glo-Xx-1tx" id="0mB-U7-8gM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="244.5" y="331"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="eVx-vC-K3s">
-            <objects>
-                <viewController id="Yuj-79-jZX" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zNB-Ef-dKh"/>
-                        <viewControllerLayoutGuide type="bottom" id="MqX-sx-5MY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oYj-iI-BJC">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B6d-i5-L1N" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>
