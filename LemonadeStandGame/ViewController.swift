@@ -87,6 +87,12 @@ class ViewController: UIViewController {
         lemonPurchaseCounter += 1
         lemonPurchaseNumberLabel.text = "\(lemonPurchaseCounter)"
         minusLemonPurchaseButton.hidden = false
+        
+        lemonInventory += 1
+        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+        
+        funds -= 2
+        fundsLabel.text = "$\(funds)"
     }
     
     @IBAction func minusLemonPurchaseButtonPressed(sender: AnyObject) {
@@ -97,12 +103,24 @@ class ViewController: UIViewController {
         } else {
             minusLemonPurchaseButton.hidden = false
         }
+        
+        lemonInventory -= 1
+        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+        
+        funds += 2
+        fundsLabel.text = "$\(funds)"
     }
     
     @IBAction func addIceCubePurchaseButtonPressed(sender: AnyObject) {
         iceCubePurchaseCounter += 1
         iceCubePurchaseNumberLabel.text = "\(iceCubePurchaseCounter)"
         minusIceCubePurchaseButton.hidden = false
+        
+        iceCubeInventory += 1
+        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+        
+        funds -= 1
+        fundsLabel.text = "$\(funds)"
     }
     
     @IBAction func minusIceCubePurchaseButtonPressed(sender: AnyObject) {
@@ -113,12 +131,21 @@ class ViewController: UIViewController {
         } else {
             minusIceCubePurchaseButton.hidden = false
         }
+        
+        iceCubeInventory -= 1
+        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+        
+        funds += 1
+        fundsLabel.text = "$\(funds)"
     }
     
     @IBAction func addLemonMixButtonPressed(sender: AnyObject) {
         lemonMixCounter += 1
         lemonMixNumberLabel.text = "\(lemonMixCounter)"
         minusLemonMixButton.hidden = false
+        
+        lemonInventory -= 1
+        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
     }
     
     @IBAction func minusLemonMixButtonPressed(sender: AnyObject) {
@@ -129,12 +156,18 @@ class ViewController: UIViewController {
         } else {
             minusLemonMixButton.hidden = false
         }
+        
+        lemonInventory += 1
+        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
     }
     
     @IBAction func addIceCubeMixButtonPressed(sender: AnyObject) {
         iceCubeMixCounter += 1
         iceCubeMixNumberLabel.text = "\(iceCubeMixCounter)"
         minusIceCubeMixButton.hidden = false
+        
+        iceCubeInventory -= 1
+        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
     }
     
     @IBAction func minusIceCubeMixButtonPressed(sender: AnyObject) {
@@ -145,6 +178,9 @@ class ViewController: UIViewController {
         } else {
             minusIceCubeMixButton.hidden = false
         }
+        
+        iceCubeInventory += 1
+        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
     }
     
     func updateInventory() {
