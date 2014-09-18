@@ -379,10 +379,6 @@
                         <outlet property="lemonInventoryLabel" destination="8Qh-iJ-e7y" id="KV8-Lc-pIA"/>
                         <outlet property="lemonMixNumberLabel" destination="ejc-5V-PAX" id="0oh-71-Heh"/>
                         <outlet property="lemonPurchaseNumberLabel" destination="Zap-vr-Txa" id="Gxq-Ct-ByZ"/>
-                        <outlet property="minusIceCubeMixButton" destination="5fJ-Io-jO7" id="a2J-gU-23V"/>
-                        <outlet property="minusIceCubePurchaseButton" destination="7a3-Fu-OQv" id="Slo-3K-v0V"/>
-                        <outlet property="minusLemonMixButton" destination="nb2-jw-W1P" id="2pf-ub-CUj"/>
-                        <outlet property="minusLemonPurchaseButton" destination="yWz-bo-YXr" id="FVq-An-COS"/>
                         <outlet property="weatherImage" destination="glo-Xx-1tx" id="0mB-U7-8gM"/>
                     </connections>
                 </viewController>

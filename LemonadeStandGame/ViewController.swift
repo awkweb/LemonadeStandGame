@@ -20,17 +20,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var lemonPurchaseNumberLabel: UILabel!
     
-    @IBOutlet weak var minusLemonPurchaseButton: UIButton!
-    
     @IBOutlet weak var iceCubePurchaseNumberLabel: UILabel!
     
-    @IBOutlet weak var minusIceCubePurchaseButton: UIButton!
-    
     @IBOutlet weak var lemonMixNumberLabel: UILabel!
-    
-    @IBOutlet weak var minusLemonMixButton: UIButton!
-    
-    @IBOutlet weak var minusIceCubeMixButton: UIButton!
     
     @IBOutlet weak var iceCubeMixNumberLabel: UILabel!
     
@@ -38,44 +30,27 @@ class ViewController: UIViewController {
     var funds = 10
     var lemonInventory = 1
     var iceCubeInventory = 1
+    
     var lemonPurchaseCounter = 0
     var iceCubePurchaseCounter = 0
+    
     var lemonMixCounter = 0
     var iceCubeMixCounter = 0
+    
+    var lemonadeRatio = 1.0
+    var preferenceList:[Double] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
                 
         fundsLabel.text = "$\(funds)"
-        
         lemonInventoryLabel.text = "\(lemonInventory) Lemon"
-        
         iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube"
-        
         lemonPurchaseNumberLabel.text = "\(lemonPurchaseCounter)"
-        
-        if lemonPurchaseCounter == 0 {
-            minusLemonPurchaseButton.hidden = true
-        }
-        
         iceCubePurchaseNumberLabel.text = "\(iceCubePurchaseCounter)"
-        
-        if iceCubePurchaseCounter == 0 {
-            minusIceCubePurchaseButton.hidden = true
-        }
-        
         lemonMixNumberLabel.text = "\(lemonMixCounter)"
-        
-        if lemonMixCounter == 0 {
-            minusLemonMixButton.hidden = true
-        }
-        
         iceCubeMixNumberLabel.text = "\(iceCubeMixCounter)"
-        
-        if iceCubeMixCounter == 0 {
-            minusIceCubeMixButton.hidden = true
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,110 +59,159 @@ class ViewController: UIViewController {
     }
 
     @IBAction func addLemonPurchaseButtonPressed(sender: AnyObject) {
-        lemonPurchaseCounter += 1
-        lemonPurchaseNumberLabel.text = "\(lemonPurchaseCounter)"
-        minusLemonPurchaseButton.hidden = false
+        if funds >= 2 {
+            lemonPurchaseCounter += 1
+            lemonPurchaseNumberLabel.text = "\(lemonPurchaseCounter)"
         
-        lemonInventory += 1
-        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+            lemonInventory += 1
+            lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
         
-        funds -= 2
-        fundsLabel.text = "$\(funds)"
+            funds -= 2
+            fundsLabel.text = "$\(funds)"
+        }
     }
     
     @IBAction func minusLemonPurchaseButtonPressed(sender: AnyObject) {
-        lemonPurchaseCounter -= 1
-        lemonPurchaseNumberLabel.text = "\(lemonPurchaseCounter)"
-        if lemonPurchaseCounter == 0 {
-            minusLemonPurchaseButton.hidden = true
-        } else {
-            minusLemonPurchaseButton.hidden = false
+        if lemonPurchaseCounter > 0 {
+            lemonPurchaseCounter -= 1
+            lemonPurchaseNumberLabel.text = "\(lemonPurchaseCounter)"
+        
+            lemonInventory -= 1
+            lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+        
+            funds += 2
+            fundsLabel.text = "$\(funds)"
         }
-        
-        lemonInventory -= 1
-        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
-        
-        funds += 2
-        fundsLabel.text = "$\(funds)"
     }
     
     @IBAction func addIceCubePurchaseButtonPressed(sender: AnyObject) {
-        iceCubePurchaseCounter += 1
-        iceCubePurchaseNumberLabel.text = "\(iceCubePurchaseCounter)"
-        minusIceCubePurchaseButton.hidden = false
+        if funds >= 1 {
+            iceCubePurchaseCounter += 1
+            iceCubePurchaseNumberLabel.text = "\(iceCubePurchaseCounter)"
         
-        iceCubeInventory += 1
-        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+            iceCubeInventory += 1
+            iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
         
-        funds -= 1
-        fundsLabel.text = "$\(funds)"
+            funds -= 1
+            fundsLabel.text = "$\(funds)"
+        }
     }
     
     @IBAction func minusIceCubePurchaseButtonPressed(sender: AnyObject) {
-        iceCubePurchaseCounter -= 1
-        iceCubePurchaseNumberLabel.text = "\(iceCubePurchaseCounter)"
-        if iceCubePurchaseCounter == 0 {
-            minusIceCubePurchaseButton.hidden = true
-        } else {
-            minusIceCubePurchaseButton.hidden = false
+        if iceCubePurchaseCounter > 0 {
+            iceCubePurchaseCounter -= 1
+            iceCubePurchaseNumberLabel.text = "\(iceCubePurchaseCounter)"
+        
+            iceCubeInventory -= 1
+            iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+        
+            funds += 1
+            fundsLabel.text = "$\(funds)"
         }
-        
-        iceCubeInventory -= 1
-        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
-        
-        funds += 1
-        fundsLabel.text = "$\(funds)"
     }
     
     @IBAction func addLemonMixButtonPressed(sender: AnyObject) {
-        lemonMixCounter += 1
-        lemonMixNumberLabel.text = "\(lemonMixCounter)"
-        minusLemonMixButton.hidden = false
+        if lemonInventory > 0 {
+            lemonMixCounter += 1
+            lemonMixNumberLabel.text = "\(lemonMixCounter)"
         
-        lemonInventory -= 1
-        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+            lemonInventory -= 1
+            lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+        }
     }
     
     @IBAction func minusLemonMixButtonPressed(sender: AnyObject) {
-        lemonMixCounter -= 1
-        lemonMixNumberLabel.text = "\(lemonMixCounter)"
-        if lemonMixCounter == 0 {
-            minusLemonMixButton.hidden = true
-        } else {
-            minusLemonMixButton.hidden = false
-        }
+        if lemonMixCounter > 0 {
+            lemonMixCounter -= 1
+            lemonMixNumberLabel.text = "\(lemonMixCounter)"
         
-        lemonInventory += 1
-        lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+            lemonInventory += 1
+            lemonInventoryLabel.text = "\(lemonInventory) Lemon(s)"
+        }
     }
     
     @IBAction func addIceCubeMixButtonPressed(sender: AnyObject) {
-        iceCubeMixCounter += 1
-        iceCubeMixNumberLabel.text = "\(iceCubeMixCounter)"
-        minusIceCubeMixButton.hidden = false
+        if iceCubeInventory > 0 {
+            iceCubeMixCounter += 1
+            iceCubeMixNumberLabel.text = "\(iceCubeMixCounter)"
         
-        iceCubeInventory -= 1
-        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+            iceCubeInventory -= 1
+            iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+        }
     }
     
     @IBAction func minusIceCubeMixButtonPressed(sender: AnyObject) {
-        iceCubeMixCounter -= 1
-        iceCubeMixNumberLabel.text = "\(iceCubeMixCounter)"
-        if iceCubeMixCounter == 0 {
-            minusIceCubeMixButton.hidden = true
-        } else {
-            minusIceCubeMixButton.hidden = false
-        }
+        if iceCubeMixCounter > 0 {
+            iceCubeMixCounter -= 1
+            iceCubeMixNumberLabel.text = "\(iceCubeMixCounter)"
         
-        iceCubeInventory += 1
-        iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+            iceCubeInventory += 1
+            iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube(s)"
+        }
     }
     
-    func updateInventory() {
-        
+    func mixLemonade() {
+        lemonadeRatio = Double(lemonMixCounter) / Double(iceCubeMixCounter)
+        println("The lemonade ratio is: \(lemonadeRatio).")
+    }
+    
+    func createCustomers() {
+        var numberOfCustomers = Int(arc4random_uniform(UInt32(11)))
+        while numberOfCustomers == 0 {
+            numberOfCustomers = Int(arc4random_uniform(UInt32(11)))
+        }
+        println("Number of customers: \(numberOfCustomers)")
+        for var customer = 0; customer < numberOfCustomers; customer++ {
+            var preference = ((Double(arc4random_uniform(UInt32(11))))/10.0)
+            while preference == 0.0 {
+                preference = ((Double(arc4random_uniform(UInt32(11))))/10.0)
+            }
+            preferenceList += [preference]
+        }
+        println("\(preferenceList)")
+    }
+    
+    func sellLemonade() {
+        for customerPreference in preferenceList {
+            if customerPreference < 0.4 && lemonadeRatio > 1.0 {
+                funds += 1
+                println("Paid.")
+            }
+            else if customerPreference >= 0.4 && customerPreference <= 0.6 && lemonadeRatio == 1 {
+                funds += 1
+                println("Paid.")
+            }
+            else if customerPreference > 0.6 && lemonadeRatio < 1.0 {
+                funds += 1
+                println("Paid.")
+            }
+            else {
+                println("Not paid.")
+            }
+        }
+    }
+    
+    func closeLemonadeStand(){
+        lemonadeRatio = 0.0
+        preferenceList = []
+        fundsLabel.text = ("$\(funds)")
+        lemonPurchaseNumberLabel.text = "0"
+        iceCubePurchaseNumberLabel.text = "0"
+        lemonPurchaseCounter = 0
+        iceCubePurchaseCounter = 0
+        lemonMixNumberLabel.text = "0"
+        lemonMixCounter = 0
+        iceCubeMixNumberLabel.text = "0"
+        iceCubeMixCounter = 0
     }
     
     @IBAction func startDayButtonPressed(sender: AnyObject) {
+        mixLemonade()
+        createCustomers()
+        sellLemonade()
+        closeLemonadeStand()
+        dayCounter += 1
+        println("\(dayCounter)")
     }
 }
 
