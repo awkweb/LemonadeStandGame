@@ -26,8 +26,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var iceCubeMixNumberLabel: UILabel!
     
-    var dayCounter = 1
+    var dayCounter = 0
     var funds = 10
+    var fundsCounter = 0
     var lemonInventory = 1
     var iceCubeInventory = 1
     
@@ -40,9 +41,21 @@ class ViewController: UIViewController {
     var lemonadeRatio = 1.0
     var preferenceList:[Double] = []
     
+    var numberOfCustomers = 0
+
+    var weatherEffect = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        var myAlertView = UIAlertView()
+        
+        myAlertView.title = "Welcome"
+        myAlertView.message = "Maintain a profit selling lemonade. Good luck!"
+        myAlertView.addButtonWithTitle("Play")
+        
+        myAlertView.show()
                 
         fundsLabel.text = "$\(funds)"
         lemonInventoryLabel.text = "\(lemonInventory) Lemon"
@@ -51,6 +64,8 @@ class ViewController: UIViewController {
         iceCubePurchaseNumberLabel.text = "\(iceCubePurchaseCounter)"
         lemonMixNumberLabel.text = "\(lemonMixCounter)"
         iceCubeMixNumberLabel.text = "\(iceCubeMixCounter)"
+        
+        weatherForecast()
     }
 
     override func didReceiveMemoryWarning() {
@@ -152,15 +167,31 @@ class ViewController: UIViewController {
     
     func mixLemonade() {
         lemonadeRatio = Double(lemonMixCounter) / Double(iceCubeMixCounter)
-        println("The lemonade ratio is: \(lemonadeRatio).")
+    }
+    
+    func weatherForecast() {
+        var randomWeather = Int(arc4random_uniform(UInt32(3)))
+        switch randomWeather {
+        case 0:
+            weatherImage.image = UIImage(named:"mild.png")
+            weatherEffect = 0
+        case 1:
+            weatherImage.image = UIImage(named:"cold.png")
+            weatherEffect = -3
+        case 2:
+            weatherImage.image = UIImage(named:"warm.png")
+            weatherEffect = 4
+        default:
+            weatherEffect = 0
+        }
     }
     
     func createCustomers() {
-        var numberOfCustomers = Int(arc4random_uniform(UInt32(11)))
+        numberOfCustomers = Int(arc4random_uniform(UInt32(11)))
         while numberOfCustomers == 0 {
             numberOfCustomers = Int(arc4random_uniform(UInt32(11)))
         }
-        println("Number of customers: \(numberOfCustomers)")
+        numberOfCustomers += weatherEffect
         for var customer = 0; customer < numberOfCustomers; customer++ {
             var preference = ((Double(arc4random_uniform(UInt32(11))))/10.0)
             while preference == 0.0 {
@@ -168,26 +199,47 @@ class ViewController: UIViewController {
             }
             preferenceList += [preference]
         }
-        println("\(preferenceList)")
     }
     
     func sellLemonade() {
         for customerPreference in preferenceList {
             if customerPreference < 0.4 && lemonadeRatio > 1.0 {
                 funds += 1
-                println("Paid.")
+                fundsCounter += 1
             }
             else if customerPreference >= 0.4 && customerPreference <= 0.6 && lemonadeRatio == 1 {
                 funds += 1
-                println("Paid.")
+                fundsCounter += 1
             }
             else if customerPreference > 0.6 && lemonadeRatio < 1.0 {
                 funds += 1
-                println("Paid.")
+                fundsCounter += 1
             }
-            else {
-                println("Not paid.")
-            }
+        }
+    }
+    
+    func summaryAlert() {
+        var myAlertView = UIAlertView()
+        
+        if funds == 0 {
+            myAlertView.title = "Game Over"
+            myAlertView.message = "You made it through \(dayCounter) days."
+            myAlertView.addButtonWithTitle("Play Again?")
+        
+            myAlertView.show()
+            
+            funds = 10
+            lemonInventory = 1
+            lemonInventoryLabel.text = "\(lemonInventory) Lemon"
+            iceCubeInventory = 1
+            iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube"
+        }
+        else {
+            myAlertView.title = "Day \(dayCounter) Summary"
+            myAlertView.message = "Made: $\(fundsCounter)\n Customers: \(preferenceList.count)"
+            myAlertView.addButtonWithTitle("Continue to Day \(dayCounter + 1)")
+            
+            myAlertView.show()
         }
     }
     
@@ -203,15 +255,19 @@ class ViewController: UIViewController {
         lemonMixCounter = 0
         iceCubeMixNumberLabel.text = "0"
         iceCubeMixCounter = 0
+        fundsCounter = 0
+        weatherEffect = 0
+        
+        weatherForecast()
     }
     
     @IBAction func startDayButtonPressed(sender: AnyObject) {
         mixLemonade()
         createCustomers()
         sellLemonade()
-        closeLemonadeStand()
         dayCounter += 1
-        println("\(dayCounter)")
+        summaryAlert()
+        closeLemonadeStand()
     }
 }
 
