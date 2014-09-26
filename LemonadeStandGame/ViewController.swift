@@ -222,11 +222,7 @@ class ViewController: UIViewController {
         var myAlertView = UIAlertView()
         
         if funds == 0 {
-            myAlertView.title = "Game Over"
-            myAlertView.message = "You made it through \(dayCounter) days."
-            myAlertView.addButtonWithTitle("Play Again?")
-        
-            myAlertView.show()
+            showAlertWithText(header: "Game Over", message: "You made it through \(dayCounter) days.", actionMessage: "Play Again?")
             
             funds = 10
             lemonInventory = 1
@@ -235,11 +231,7 @@ class ViewController: UIViewController {
             iceCubeInventoryLabel.text = "\(iceCubeInventory) Ice Cube"
         }
         else {
-            myAlertView.title = "Day \(dayCounter) Summary"
-            myAlertView.message = "Made: $\(fundsCounter)\n Customers: \(preferenceList.count)"
-            myAlertView.addButtonWithTitle("Continue to Day \(dayCounter + 1)")
-            
-            myAlertView.show()
+            showAlertWithText(header: "Day \(dayCounter) Summary", message: "Made: $\(fundsCounter)\n Customers: \(preferenceList.count)", actionMessage: "Continue to Day \(dayCounter + 1)")
         }
     }
     
@@ -268,6 +260,12 @@ class ViewController: UIViewController {
         dayCounter += 1
         summaryAlert()
         closeLemonadeStand()
+    }
+    
+    func showAlertWithText(header: String = "Warning", message: String, actionMessage: String) {
+        var alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: actionMessage, style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }
 
